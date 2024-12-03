@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxo5qk1q4qxmn"]
+
+[ext_resource type="PackedScene" uid="uid://6ci8mcgi2flu" path="res://Scenes/EggShellPrototyper.tscn" id="1_jtbab"]
+[ext_resource type="PackedScene" uid="uid://bmxkuygj86abv" path="res://Scenes/BlueprintIcon.tscn" id="2_1nwnh"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ShellMachine" parent="." instance=ExtResource("1_jtbab")]
+layout_mode = 1
+
+[node name="Blueprint" parent="." instance=ExtResource("2_1nwnh")]
+layout_mode = 1
+offset_left = 330.0
+offset_top = 104.0
+offset_right = -141.0
+offset_bottom = -227.0

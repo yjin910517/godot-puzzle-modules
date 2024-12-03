@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmxkuygj86abv"]
+
+[ext_resource type="Script" path="res://Scripts/blueprint_icon.gd" id="1_0p3ne"]
+
+[node name="Blueprint" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -471.0
+offset_bottom = -331.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0p3ne")
+bp_shape = 1
+bp_size = 1
+metadata/_edit_group_ = true
+
+[node name="Icon" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.239216, 1, 1, 1)

@@ -1,0 +1,225 @@
+[gd_scene load_steps=20 format=3 uid="uid://6ci8mcgi2flu"]
+
+[ext_resource type="Script" path="res://Scripts/egg_shell_prototyper.gd" id="1_4qwqx"]
+[ext_resource type="Texture2D" uid="uid://d4bc22qismjcw" path="res://Arts/shell_prototype_machine.png" id="1_6psxe"]
+[ext_resource type="Texture2D" uid="uid://b5kv5cdexfhi6" path="res://Arts/shell_icons/2_2_0.png" id="3_6ee2e"]
+[ext_resource type="Script" path="res://Scripts/shell_prototyper_display.gd" id="3_7r2fg"]
+[ext_resource type="Texture2D" uid="uid://clkxmwni0m1i6" path="res://Arts/not_match_text.png" id="3_t7cru"]
+[ext_resource type="Texture2D" uid="uid://bb8g6wnrg68dk" path="res://Arts/twist_knob_shape.png" id="4_gaflh"]
+[ext_resource type="Texture2D" uid="uid://b0cp8ta3c0u7g" path="res://Arts/shell_icons/0_2_0_light.png" id="4_lqdly"]
+[ext_resource type="Texture2D" uid="uid://dxuta3w3pxmy2" path="res://Arts/twist_knob_size.png" id="5_vjqhc"]
+[ext_resource type="Texture2D" uid="uid://6h16gwadt8lt" path="res://Arts/switch_thickness.png" id="6_7jjaw"]
+[ext_resource type="Texture2D" uid="uid://bvsjdftl0eaoe" path="res://Arts/ready_text.png" id="7_3xrsq"]
+[ext_resource type="Texture2D" uid="uid://cuj0lpbdkk8ts" path="res://Arts/button_go_active_1.png" id="7_52xnd"]
+[ext_resource type="Script" path="res://Scripts/shell_prototyper_panel.gd" id="8_2u6aa"]
+[ext_resource type="Texture2D" uid="uid://kndcigh36dbq" path="res://Arts/button_go_active_2.png" id="8_qgaj4"]
+[ext_resource type="Texture2D" uid="uid://gjo4idpop2ru" path="res://Arts/button_go_inactive.png" id="9_3i500"]
+[ext_resource type="Script" path="res://Scripts/shell_prototyper_blueprint.gd" id="15_ga36x"]
+
+[sub_resource type="Animation" id="Animation_ltg5d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Display/Feedback:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(110, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_0821c"]
+resource_name = "not_match"
+length = 0.67
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Display/Feedback:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5, 0.666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(110, 2), Vector2(108, 2), Vector2(110, 2), Vector2(112, 2), Vector2(110, 2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o6tbi"]
+_data = {
+"RESET": SubResource("Animation_ltg5d"),
+"not_match": SubResource("Animation_0821c")
+}
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a3jlw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_52xnd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_qgaj4")
+}],
+"loop": true,
+"name": &"active",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_3i500")
+}],
+"loop": true,
+"name": &"inactive",
+"speed": 5.0
+}]
+
+[node name="ShellMachine" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4qwqx")
+
+[node name="Machine" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_6psxe")
+
+[node name="Display" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 20.0
+offset_top = 76.0
+offset_right = 236.0
+offset_bottom = 160.0
+script = ExtResource("3_7r2fg")
+
+[node name="Reference" type="TextureRect" parent="Display"]
+layout_mode = 0
+offset_top = -6.0
+offset_right = 50.0
+offset_bottom = 44.0
+scale = Vector2(2, 2)
+texture = ExtResource("3_6ee2e")
+
+[node name="ReferenceShade" type="ColorRect" parent="Display/Reference"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 3.0
+offset_right = 48.0
+offset_bottom = 45.0
+color = Color(0.156863, 0.211765, 0.0941176, 0.498039)
+
+[node name="Selection" type="TextureRect" parent="Display"]
+layout_mode = 0
+offset_top = -6.0
+offset_right = 50.0
+offset_bottom = 44.0
+scale = Vector2(2, 2)
+texture = ExtResource("4_lqdly")
+
+[node name="Feedback" type="TextureRect" parent="Display"]
+layout_mode = 0
+offset_left = 110.0
+offset_top = 2.0
+offset_right = 162.0
+offset_bottom = 42.0
+scale = Vector2(2, 2)
+texture = ExtResource("3_t7cru")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Display"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_o6tbi")
+}
+
+[node name="FullScreen" type="TextureRect" parent="Display"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 215.0
+offset_bottom = 83.0
+texture = ExtResource("7_3xrsq")
+stretch_mode = 5
+
+[node name="Panel" type="Control" parent="."]
+anchors_preset = 0
+offset_top = 184.0
+offset_right = 256.0
+offset_bottom = 368.0
+script = ExtResource("8_2u6aa")
+
+[node name="ShapeKnobControl" type="Control" parent="Panel"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 5.0
+offset_top = 1.0
+offset_right = 121.0
+offset_bottom = 95.0
+metadata/_edit_group_ = true
+
+[node name="ShapeKnob" type="Sprite2D" parent="Panel/ShapeKnobControl"]
+scale = Vector2(2, 2)
+texture = ExtResource("4_gaflh")
+centered = false
+hframes = 3
+frame = 1
+
+[node name="SizeKnobControl" type="Control" parent="Panel"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 134.0
+offset_top = 1.0
+offset_right = 250.0
+offset_bottom = 95.0
+metadata/_edit_group_ = true
+
+[node name="SizeKnob" type="Sprite2D" parent="Panel/SizeKnobControl"]
+scale = Vector2(2, 2)
+texture = ExtResource("5_vjqhc")
+centered = false
+hframes = 3
+frame = 2
+
+[node name="ThickControl" type="Control" parent="Panel"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 16.0
+offset_top = 105.0
+offset_right = 136.0
+offset_bottom = 159.0
+metadata/_edit_group_ = true
+
+[node name="ThicknessSwitch" type="Sprite2D" parent="Panel/ThickControl"]
+scale = Vector2(2, 2)
+texture = ExtResource("6_7jjaw")
+centered = false
+hframes = 2
+frame = 1
+
+[node name="ButtonControl" type="Control" parent="Panel"]
+anchors_preset = 0
+offset_left = 167.0
+offset_top = 106.0
+offset_right = 233.0
+offset_bottom = 156.0
+metadata/_edit_group_ = true
+
+[node name="GoButton" type="AnimatedSprite2D" parent="Panel/ButtonControl"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_a3jlw")
+animation = &"inactive"
+frame_progress = 0.0970369
+centered = false
+
+[node name="Blueprint" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 41.0
+offset_right = 120.0
+offset_bottom = 59.0
+script = ExtResource("15_ga36x")
