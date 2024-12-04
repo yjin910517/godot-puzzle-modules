@@ -1,28 +1,37 @@
-[gd_scene load_steps=2 format=3 uid="uid://dcm88p2ickjtu"]
+[gd_scene load_steps=4 format=3 uid="uid://dcm88p2ickjtu"]
 
 [ext_resource type="Script" path="res://Scripts/holding_bar_ui.gd" id="1_1hghl"]
+[ext_resource type="Texture2D" uid="uid://c2weubsx76rxr" path="res://Arts/holding_bar_1.png" id="2_8nv0h"]
+[ext_resource type="Texture2D" uid="uid://bl5gsocp7jru1" path="res://Arts/holding_ticker.png" id="3_gxgvf"]
 
 [node name="HoldingUI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -676.0
-offset_bottom = -376.0
+offset_right = -512.0
+offset_bottom = -464.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1hghl")
 
-[node name="Bar" type="ColorRect" parent="."]
+[node name="Bar" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 44.0
+offset_right = -224.0
+offset_bottom = 24.0
 grow_horizontal = 2
-color = Color(1, 0.313726, 1, 1)
+scale = Vector2(2, 2)
+texture = ExtResource("2_8nv0h")
+stretch_mode = 5
 
-[node name="Ticker" type="ColorRect" parent="."]
+[node name="Ticker" type="TextureRect" parent="."]
 layout_mode = 0
-offset_top = 42.0
-offset_right = 14.0
-offset_bottom = 82.0
+offset_left = -18.0
+offset_top = 48.0
+offset_bottom = 62.0
+scale = Vector2(2, 2)
+texture = ExtResource("3_gxgvf")
+stretch_mode = 5
+flip_v = true

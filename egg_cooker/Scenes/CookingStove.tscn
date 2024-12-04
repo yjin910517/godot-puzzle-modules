@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://cv4to1bxtvcno"]
+
+[ext_resource type="Texture2D" uid="uid://di5tnmum8b4kr" path="res://Arts/frying_pan.png" id="1_rexdq"]
+[ext_resource type="Texture2D" uid="uid://g5eljnv3bky6" path="res://Arts/fried_egg1.png" id="2_jrab0"]
+[ext_resource type="Texture2D" uid="uid://xpy4swdhxxax" path="res://Arts/fried_egg2.png" id="3_omuuu"]
+[ext_resource type="Texture2D" uid="uid://b0kaior4xnvoa" path="res://Arts/fried_egg3.png" id="4_b5oiv"]
+[ext_resource type="Texture2D" uid="uid://cx770qgbgl02u" path="res://Arts/fried_egg4.png" id="5_bj4hh"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c2gaf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jrab0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_omuuu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_b5oiv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_bj4hh")
+}],
+"loop": true,
+"name": &"fry_egg",
+"speed": 1.0
+}]
+
+[node name="CookingStove" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FryingPan" type="TextureRect" parent="."]
+offset_left = 95.0
+offset_top = 86.0
+offset_right = 203.0
+offset_bottom = 168.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_rexdq")
+stretch_mode = 5
+
+[node name="Food" type="AnimatedSprite2D" parent="."]
+position = Vector2(234, 158)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_c2gaf")
+animation = &"fry_egg"
+frame = 3
+frame_progress = 0.900641
