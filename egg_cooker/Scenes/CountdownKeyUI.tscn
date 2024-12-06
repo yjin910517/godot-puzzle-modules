@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcv8i0g8sh8q"]
+
+[ext_resource type="Script" path="res://Scripts/countdown_key_ui.gd" id="1_gjr5h"]
+[ext_resource type="Texture2D" uid="uid://cc3kkcka8msfx" path="res://Arts/countdown_key_over.png" id="2_ddqe1"]
+[ext_resource type="Texture2D" uid="uid://bjrbhflc2vi8x" path="res://Arts/countdown_key_progress.png" id="3_0pxbv"]
+
+[node name="TimedPressUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -896.0
+offset_bottom = -476.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gjr5h")
+
+[node name="Countdown" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+value = 100.0
+fill_mode = 4
+texture_over = ExtResource("2_ddqe1")
+texture_progress = ExtResource("3_0pxbv")
+tint_progress = Color(1, 1, 1, 0.670588)

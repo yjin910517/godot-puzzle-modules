@@ -19,8 +19,11 @@ func _ready() -> void:
 	is_reacting = true
 	smash_started = false
 	
-	forward_speed = 700
-	backward_speed = 10
+	energy_bar.max_value = max_target
+	energy_bar.value = 0
+	
+	forward_speed = 1200
+	backward_speed = 20
 
 
 func _process(delta):
@@ -30,18 +33,20 @@ func _process(delta):
 			key.play("smash")
 			smash_started = true
 			
-			if energy_bar.size.x + forward_speed * delta <= max_target:
-				energy_bar.size.x += forward_speed * delta
+			if energy_bar.value + forward_speed * delta <= max_target:
+				energy_bar.value += forward_speed * delta
 			else:
-				energy_bar.size.x = max_target
+				energy_bar.value = max_target
 				is_reacting = false
 				print("Egg well stirred!")
 		
 		# decrease the energy bar at a constant speed
 		if smash_started:
-			if energy_bar.size.x - backward_speed * delta > 0:
-				energy_bar.size.x -= backward_speed * delta
+			print("value", energy_bar.value )
+			print("change", backward_speed * delta)
+			if energy_bar.value - backward_speed * delta > 0:
+				energy_bar.value -= backward_speed * delta
 			else: 
-				energy_bar.size.x = 0
+				energy_bar.value = 0
 				is_reacting = false
 				print("Mission failed")

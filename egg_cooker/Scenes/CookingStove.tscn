@@ -35,6 +35,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="FryingPan" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = 95.0
 offset_top = 86.0
 offset_right = 203.0

@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://duri8wnmex1p5"]
+[gd_scene load_steps=7 format=3 uid="uid://duri8wnmex1p5"]
 
 [ext_resource type="Script" path="res://Scripts/smash_key_ui.gd" id="1_pw0i3"]
 [ext_resource type="Texture2D" uid="uid://dfeb4ofy6w1bt" path="res://Arts/smash_button_icon1.png" id="2_7lil7"]
+[ext_resource type="Texture2D" uid="uid://dkgaf6568thub" path="res://Arts/smash_bar.png" id="2_bu4gp"]
 [ext_resource type="Texture2D" uid="uid://c6lyghjiauaei" path="res://Arts/smash_button_icon2.png" id="3_5dnkf"]
+[ext_resource type="Texture2D" uid="uid://cc0u3f05tl11m" path="res://Arts/smash_bar_progress.png" id="3_qej62"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_c8pvr"]
 animations = [{
@@ -26,17 +28,23 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -742.0
+offset_bottom = -449.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pw0i3")
 
-[node name="EnergyBar" type="ColorRect" parent="."]
+[node name="EnergyBar" type="TextureProgressBar" parent="."]
 layout_mode = 0
-offset_right = 15.0
-offset_bottom = 40.0
+offset_right = 218.0
+offset_bottom = 25.0
+step = 0.1
+value = 50.0
+texture_under = ExtResource("2_bu4gp")
+texture_progress = ExtResource("3_qej62")
 
 [node name="KeyIcon" type="AnimatedSprite2D" parent="."]
-position = Vector2(60, 77)
+position = Vector2(106, 71)
 sprite_frames = SubResource("SpriteFrames_c8pvr")
 animation = &"smash"
 frame_progress = 0.0336078
