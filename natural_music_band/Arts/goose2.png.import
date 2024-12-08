@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bteqauxm7g3xt"
-path="res://.godot/imported/beat_mark_1.png-f808400158edde85001f245af9523bf6.ctex"
+uid="uid://0s2k6iehvhd5"
+path="res://.godot/imported/goose2.png-d62fde710eec02b67e34e3fa6b37b31b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Arts/beat_mark_1.png"
-dest_files=["res://.godot/imported/beat_mark_1.png-f808400158edde85001f245af9523bf6.ctex"]
+source_file="res://Arts/goose2.png"
+dest_files=["res://.godot/imported/goose2.png-d62fde710eec02b67e34e3fa6b37b31b.ctex"]
 
 [params]
 

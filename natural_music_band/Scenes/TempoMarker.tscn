@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://bef5soljp4vhi"]
+
+[ext_resource type="Script" path="res://Scripts/tempo_marker.gd" id="1_swywv"]
+[ext_resource type="Texture2D" uid="uid://croogwchgmsut" path="res://Arts/beat_mark2.png" id="2_pumtl"]
+[ext_resource type="Texture2D" uid="uid://dn1n53wtbo6gk" path="res://Arts/beat_mark1.png" id="3_hafo2"]
+[ext_resource type="AudioStream" uid="uid://bjyprxvrjgik8" path="res://Audio/tempo_tick.wav" id="4_wa6vr"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hf6k5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_pumtl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_hafo2")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m3x21"]
+size = Vector2(4, 20)
+
+[node name="TempoMarker" type="Area2D"]
+script = ExtResource("1_swywv")
+metadata/_edit_group_ = true
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hf6k5")
+frame = 1
+frame_progress = 1.0
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(2, 0)
+shape = SubResource("RectangleShape2D_m3x21")
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_wa6vr")

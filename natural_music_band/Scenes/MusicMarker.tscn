@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://i5oitry2h1j"]
+
+[ext_resource type="Script" path="res://Scripts/music_marker.gd" id="1_xd4bh"]
+[ext_resource type="Texture2D" uid="uid://cvv27lf3u16jj" path="res://Arts/music_mark_frog.png" id="2_gjirx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m3x21"]
+size = Vector2(4, 20)
+
+[node name="MusicMarker" type="Area2D"]
+script = ExtResource("1_xd4bh")
+metadata/_edit_group_ = true
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_gjirx")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(2, 0)
+shape = SubResource("RectangleShape2D_m3x21")

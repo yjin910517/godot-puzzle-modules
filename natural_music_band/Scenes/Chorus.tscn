@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://dkbjshy3iu3d0"]
+
+[ext_resource type="PackedScene" uid="uid://q6fdighwv8gx" path="res://Scenes/Frog.tscn" id="1_1h6dl"]
+[ext_resource type="Script" path="res://Scripts/music_sheet.gd" id="1_degoe"]
+[ext_resource type="Script" path="res://Scripts/chorus.gd" id="1_hchap"]
+[ext_resource type="PackedScene" uid="uid://cxofafwywmheh" path="res://Scenes/MusicRoll.tscn" id="2_5s5iq"]
+[ext_resource type="PackedScene" uid="uid://hehhdw124dta" path="res://Scenes/Goose.tscn" id="4_mocgu"]
+[ext_resource type="PackedScene" uid="uid://dhlr2nesh0d6n" path="res://Scenes/Lizard.tscn" id="6_gd15n"]
+
+[node name="Chorus" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hchap")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.94902, 0.909804, 0.811765, 1)
+
+[node name="MusicSheet" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 115.0
+offset_top = 29.0
+offset_right = 850.0
+offset_bottom = 282.0
+script = ExtResource("1_degoe")
+
+[node name="MusicRoll" parent="MusicSheet" instance=ExtResource("2_5s5iq")]
+
+[node name="Frog" parent="." instance=ExtResource("1_1h6dl")]
+position = Vector2(441, 486)
+
+[node name="Lizard" parent="." instance=ExtResource("6_gd15n")]
+position = Vector2(310, 389)
+
+[node name="Goose" parent="." instance=ExtResource("4_mocgu")]
+position = Vector2(681, 421)

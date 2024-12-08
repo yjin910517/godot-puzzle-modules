@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://dhlr2nesh0d6n"]
+
+[ext_resource type="Script" path="res://Scripts/sound_unit.gd" id="1_ku5ym"]
+[ext_resource type="Texture2D" uid="uid://b3jsmhsfedibf" path="res://Arts/lizard_green2.png" id="2_ugn08"]
+[ext_resource type="Texture2D" uid="uid://dn24ganpmtdm5" path="res://Arts/lizard_green1.png" id="3_45hxx"]
+[ext_resource type="Texture2D" uid="uid://rksvhcmcp1n1" path="res://Arts/lizard_green3.png" id="3_asyrj"]
+[ext_resource type="AudioStream" uid="uid://cd6j7cun4m0nm" path="res://Audio/unit_sound/lizard_sound.wav" id="4_owg7i"]
+[ext_resource type="Texture2D" uid="uid://bxi5gyvo6tigi" path="res://Arts/lizard_green4.png" id="4_rsfev"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hm5fj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ugn08")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_asyrj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_rsfev")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_45hxx")
+}],
+"loop": false,
+"name": &"sing",
+"speed": 16.0
+}]
+
+[node name="Lizard" type="Node2D"]
+script = ExtResource("1_ku5ym")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_hm5fj")
+animation = &"sing"
+frame = 3
+frame_progress = 1.0
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_owg7i")
+volume_db = -3.962
