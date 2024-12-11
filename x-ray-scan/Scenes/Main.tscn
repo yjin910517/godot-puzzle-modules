@@ -1,0 +1,83 @@
+[gd_scene load_steps=12 format=3 uid="uid://clsa5wani0r26"]
+
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_7uqxb"]
+[ext_resource type="Texture2D" uid="uid://de8pruo4sw7al" path="res://Arts/electronic_device.png" id="1_t6a1a"]
+[ext_resource type="Texture2D" uid="uid://c5wugyf8hkare" path="res://Arts/magnify_glass2.png" id="3_baimt"]
+[ext_resource type="Texture2D" uid="uid://wekdx5khr56u" path="res://Arts/clue_1.png" id="3_wxp18"]
+[ext_resource type="Texture2D" uid="uid://4af8wi7oc7s4" path="res://Arts/magnify_glass3.png" id="4_u0g3k"]
+[ext_resource type="Texture2D" uid="uid://dalgqrkqrekoc" path="res://Arts/magnify_glass4.png" id="5_8pkly"]
+[ext_resource type="Texture2D" uid="uid://blhksts3c05v3" path="res://Arts/magnify_glass5.png" id="6_85p3r"]
+[ext_resource type="Texture2D" uid="uid://3fd6wwlfewdj" path="res://Arts/magnify_glass1.png" id="7_mhcq1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jsbda"]
+size = Vector2(8, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8ilkj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_baimt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_u0g3k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_8pkly")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_85p3r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_mhcq1")
+}],
+"loop": true,
+"name": &"positive",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v0qcr"]
+radius = 20.0
+
+[node name="X-Ray" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7uqxb")
+
+[node name="Setting" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_t6a1a")
+
+[node name="Clues" type="Node2D" parent="."]
+
+[node name="BrokenWire" type="Area2D" parent="Clues"]
+position = Vector2(82, 232)
+metadata/_edit_group_ = true
+
+[node name="Sprite" type="Sprite2D" parent="Clues/BrokenWire"]
+scale = Vector2(4, 4)
+texture = ExtResource("3_wxp18")
+
+[node name="Collision" type="CollisionShape2D" parent="Clues/BrokenWire"]
+position = Vector2(2, 0)
+shape = SubResource("RectangleShape2D_jsbda")
+
+[node name="MagnifyGlass" type="Area2D" parent="."]
+position = Vector2(715, 377)
+metadata/_edit_group_ = true
+
+[node name="Sprite" type="AnimatedSprite2D" parent="MagnifyGlass"]
+sprite_frames = SubResource("SpriteFrames_8ilkj")
+animation = &"positive"
+frame = 3
+
+[node name="Collision" type="CollisionShape2D" parent="MagnifyGlass"]
+shape = SubResource("CircleShape2D_v0qcr")
