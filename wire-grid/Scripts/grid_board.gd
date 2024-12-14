@@ -9,11 +9,15 @@ func _ready() -> void:
 	var tile_nodes = tiles.get_children()
 	
 	for tile in tile_nodes:
-		tile.connect("rotated", Callable(self, "_on_tile_rotated"))
+		tile.connect("rotation_completed", Callable(self, "_on_tile_rotated"))
 
 
 func _on_tile_rotated(rotated_tile):
 	var tile_nodes = tiles.get_children()
 	
 	for tile in tile_nodes:
-		print(tile.name, " ", tile.connections)
+		tile.update_neighbors()
+		
+		print(tile.name, ": ", tile.connected_neighbors)
+		
+	# to do: add route traverse logic and run here

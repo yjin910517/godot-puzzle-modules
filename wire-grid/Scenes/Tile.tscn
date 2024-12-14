@@ -24,31 +24,33 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.776471, 0.627451, 0.415686, 1)
 
-[node name="WireConnect1" type="Area2D" parent="."]
+[node name="WireConnects" type="Node2D" parent="."]
+
+[node name="WireConnect1" type="Area2D" parent="WireConnects"]
 position = Vector2(55, 0)
 script = ExtResource("2_7pube")
 metadata/_edit_group_ = true
 
-[node name="Collision" type="CollisionShape2D" parent="WireConnect1"]
+[node name="Collision" type="CollisionShape2D" parent="WireConnects/WireConnect1"]
 position = Vector2(8, 4)
 shape = SubResource("RectangleShape2D_mncs5")
 
-[node name="ColorRect" type="ColorRect" parent="WireConnect1"]
+[node name="ColorRect" type="ColorRect" parent="WireConnects/WireConnect1"]
 offset_right = 16.0
 offset_bottom = 16.0
 color = Color(1, 1, 0.0745098, 1)
 
-[node name="WireConnect2" type="Area2D" parent="."]
+[node name="WireConnect2" type="Area2D" parent="WireConnects"]
 position = Vector2(128, 50)
 rotation = 1.5708
 script = ExtResource("2_7pube")
 metadata/_edit_group_ = true
 
-[node name="Collision" type="CollisionShape2D" parent="WireConnect2"]
+[node name="Collision" type="CollisionShape2D" parent="WireConnects/WireConnect2"]
 position = Vector2(8, 4)
 shape = SubResource("RectangleShape2D_mncs5")
 
-[node name="ColorRect" type="ColorRect" parent="WireConnect2"]
+[node name="ColorRect" type="ColorRect" parent="WireConnects/WireConnect2"]
 offset_right = 16.0
 offset_bottom = 16.0
 color = Color(1, 0.509804, 0.0745098, 1)
