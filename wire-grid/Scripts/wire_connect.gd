@@ -17,7 +17,8 @@ func get_direction():
 func set_direction(new_dir):
 	direction = new_dir	
 	
-	
+
+# tile always rotate in clockwise, move the sensor to the next direction 
 func rotate_direction():
 	direction += 1
 	if direction > 3:

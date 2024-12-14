@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://mu8yp2p77oxo"]
+[gd_scene load_steps=4 format=3 uid="uid://mu8yp2p77oxo"]
 
 [ext_resource type="PackedScene" uid="uid://bj7d4wdoojdya" path="res://Scenes/Tile.tscn" id="1_0pc3i"]
 [ext_resource type="Script" path="res://Scripts/grid_board.gd" id="1_ufv3d"]
+[ext_resource type="PackedScene" uid="uid://dku3tp0ylwkf4" path="res://Scenes/GridStart.tscn" id="3_kvhk7"]
 
 [node name="GridBoard" type="Control"]
 layout_mode = 3
@@ -16,28 +17,62 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ufv3d")
 
+[node name="Start" parent="." instance=ExtResource("3_kvhk7")]
+layout_mode = 1
+offset_left = 128.0
+offset_top = 384.0
+offset_right = -629.0
+offset_bottom = 30.0
+tile_coordinate = Vector2(3, 1)
+
 [node name="Tiles" type="Node2D" parent="."]
 
 [node name="Tile1" parent="Tiles" instance=ExtResource("1_0pc3i")]
-offset_left = 40.0
-offset_top = 32.0
-offset_right = 168.0
-offset_bottom = 160.0
 
 [node name="Tile2" parent="Tiles" instance=ExtResource("1_0pc3i")]
-offset_left = 168.0
-offset_top = 32.0
-offset_right = 296.0
-offset_bottom = 160.0
+offset_left = 128.0
+offset_right = 256.0
+tile_coordinate = Vector2(0, 1)
 
 [node name="Tile3" parent="Tiles" instance=ExtResource("1_0pc3i")]
-offset_left = 296.0
-offset_top = 32.0
-offset_right = 424.0
-offset_bottom = 160.0
+offset_left = 256.0
+offset_right = 384.0
+tile_coordinate = Vector2(0, 2)
 
 [node name="Tile4" parent="Tiles" instance=ExtResource("1_0pc3i")]
-offset_left = 168.0
-offset_top = 160.0
-offset_right = 296.0
-offset_bottom = 288.0
+offset_top = 128.0
+offset_bottom = 256.0
+tile_coordinate = Vector2(1, 0)
+
+[node name="Tile5" parent="Tiles" instance=ExtResource("1_0pc3i")]
+offset_left = 128.0
+offset_top = 128.0
+offset_right = 256.0
+offset_bottom = 256.0
+tile_coordinate = Vector2(1, 1)
+
+[node name="Tile6" parent="Tiles" instance=ExtResource("1_0pc3i")]
+offset_left = 256.0
+offset_top = 128.0
+offset_right = 384.0
+offset_bottom = 256.0
+tile_coordinate = Vector2(1, 2)
+
+[node name="Tile7" parent="Tiles" instance=ExtResource("1_0pc3i")]
+offset_top = 256.0
+offset_bottom = 384.0
+tile_coordinate = Vector2(2, 0)
+
+[node name="Tile8" parent="Tiles" instance=ExtResource("1_0pc3i")]
+offset_left = 128.0
+offset_top = 256.0
+offset_right = 256.0
+offset_bottom = 384.0
+tile_coordinate = Vector2(2, 1)
+
+[node name="Tile9" parent="Tiles" instance=ExtResource("1_0pc3i")]
+offset_left = 256.0
+offset_top = 256.0
+offset_right = 384.0
+offset_bottom = 384.0
+tile_coordinate = Vector2(2, 2)
