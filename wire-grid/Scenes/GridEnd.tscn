@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://bw7is5vkxsg2f"]
+
+[ext_resource type="Script" path="res://Scripts/grid_end.gd" id="1_6cc5q"]
+[ext_resource type="Texture2D" uid="uid://da6kodt5e7d8n" path="res://Arts/wire_end.png" id="1_jljdl"]
+[ext_resource type="Texture2D" uid="uid://blkucp3vihs0a" path="res://Arts/wire_end_connected.png" id="2_pihyo"]
+[ext_resource type="Script" path="res://Scripts/wire_connect.gd" id="3_ca45y"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_estw6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_jljdl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_pihyo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8o2t3"]
+size = Vector2(16, 16)
+
+[node name="GridEnd" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -832.0
+offset_bottom = -412.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6cc5q")
+start_direction = 2
+
+[node name="TileBG" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_estw6")
+centered = false
+
+[node name="WireConnect" type="Area2D" parent="."]
+position = Vector2(-8, 64)
+script = ExtResource("3_ca45y")
+metadata/_edit_group_ = true
+
+[node name="Collision" type="CollisionShape2D" parent="WireConnect"]
+position = Vector2(8, 0)
+shape = SubResource("RectangleShape2D_8o2t3")

@@ -19,17 +19,18 @@ func _ready() -> void:
 # for initial level data load
 func load_start_direction(init_direction):
 	wire_connect.set_direction(init_direction)
+	rotation_degrees = init_direction * 90
 
 
 func update_neighbors():
 	connected_neighbors = []
 	if len(wire_connect.get_overlapping_areas()) > 0:
 		var dir = wire_connect.get_direction()
-		var neighbor_coord = map_neighbor_node(dir)
+		var neighbor_coord = _map_neighbor_node(dir)
 		connected_neighbors.append(neighbor_coord)
 
 
-func map_neighbor_node(direction):
+func _map_neighbor_node(direction):
 	var neighbor_coord
 	if direction == 0:
 		neighbor_coord = tile_coordinate + Vector2(-1,0)

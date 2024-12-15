@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://mu8yp2p77oxo"]
+[gd_scene load_steps=5 format=3 uid="uid://mu8yp2p77oxo"]
 
 [ext_resource type="PackedScene" uid="uid://bj7d4wdoojdya" path="res://Scenes/Tile.tscn" id="1_0pc3i"]
 [ext_resource type="Script" path="res://Scripts/grid_board.gd" id="1_ufv3d"]
 [ext_resource type="PackedScene" uid="uid://dku3tp0ylwkf4" path="res://Scenes/GridStart.tscn" id="3_kvhk7"]
+[ext_resource type="PackedScene" uid="uid://bw7is5vkxsg2f" path="res://Scenes/GridEnd.tscn" id="4_7mhro"]
 
 [node name="GridBoard" type="Control"]
 layout_mode = 3
@@ -19,11 +20,12 @@ script = ExtResource("1_ufv3d")
 
 [node name="Start" parent="." instance=ExtResource("3_kvhk7")]
 layout_mode = 1
-offset_left = 128.0
-offset_top = 384.0
-offset_right = -629.0
-offset_bottom = 30.0
-tile_coordinate = Vector2(3, 1)
+offset_left = 94.0
+offset_top = 415.0
+offset_right = -663.0
+offset_bottom = 61.0
+start_direction = 3
+tile_coordinate = Vector2(0, 3)
 
 [node name="Tiles" type="Node2D" parent="."]
 
@@ -35,8 +37,10 @@ offset_right = 256.0
 tile_coordinate = Vector2(0, 1)
 
 [node name="Tile3" parent="Tiles" instance=ExtResource("1_0pc3i")]
-offset_left = 256.0
-offset_right = 384.0
+offset_left = 340.0
+offset_top = -10.0
+offset_right = 468.0
+offset_bottom = 118.0
 tile_coordinate = Vector2(0, 2)
 
 [node name="Tile4" parent="Tiles" instance=ExtResource("1_0pc3i")]
@@ -76,3 +80,13 @@ offset_top = 256.0
 offset_right = 384.0
 offset_bottom = 384.0
 tile_coordinate = Vector2(2, 2)
+
+[node name="EndNodes" type="Node2D" parent="."]
+
+[node name="End" parent="EndNodes" instance=ExtResource("4_7mhro")]
+offset_left = 465.0
+offset_top = 99.0
+offset_right = 593.0
+offset_bottom = 227.0
+start_direction = 3
+tile_coordinate = Vector2(1, 3)
