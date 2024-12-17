@@ -21,7 +21,7 @@ func _ready() -> void:
 # for initial level data load
 func load_start_direction(init_direction):
 	wire_connect.set_direction(init_direction)
-	rotation_degrees = (init_direction - 3) * 90
+	rotation_degrees = init_direction * 90
 
 
 func power_up_wire():

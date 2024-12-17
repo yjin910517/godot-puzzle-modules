@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=3 uid="uid://vu1if14cu0o7"]
+
+[ext_resource type="Script" path="res://Scripts/tile.gd" id="1_8scwa"]
+[ext_resource type="Texture2D" uid="uid://bgi1pw20m8a2o" path="res://Arts/wire_tiles1.png" id="2_28xtv"]
+[ext_resource type="Texture2D" uid="uid://d20kwtydynlcr" path="res://Arts/wire_tiles_connected1.png" id="3_w2g3y"]
+[ext_resource type="Script" path="res://Scripts/wire_connect.gd" id="4_1mcn4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2t1nt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_28xtv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_w2g3y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mncs5"]
+size = Vector2(16, 16)
+
+[node name="Tile" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 128.0
+offset_bottom = 128.0
+pivot_offset = Vector2(64, 64)
+script = ExtResource("1_8scwa")
+
+[node name="TileBG" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_2t1nt")
+centered = false
+
+[node name="WireConnects" type="Node2D" parent="."]
+
+[node name="WireConnect1" type="Area2D" parent="WireConnects"]
+position = Vector2(56, 0)
+script = ExtResource("4_1mcn4")
+metadata/_edit_group_ = true
+
+[node name="Collision" type="CollisionShape2D" parent="WireConnects/WireConnect1"]
+position = Vector2(8, 0)
+shape = SubResource("RectangleShape2D_mncs5")
+
+[node name="WireConnect2" type="Area2D" parent="WireConnects"]
+position = Vector2(120, 64)
+script = ExtResource("4_1mcn4")
+metadata/_edit_group_ = true
+
+[node name="Collision" type="CollisionShape2D" parent="WireConnects/WireConnect2"]
+position = Vector2(8, 0)
+shape = SubResource("RectangleShape2D_mncs5")
+
+[node name="WireConnect3" type="Area2D" parent="WireConnects"]
+position = Vector2(-8, 64)
+script = ExtResource("4_1mcn4")
+metadata/_edit_group_ = true
+
+[node name="Collision" type="CollisionShape2D" parent="WireConnects/WireConnect3"]
+position = Vector2(8, 0)
+shape = SubResource("RectangleShape2D_mncs5")
+
+[node name="WireConnect4" type="Area2D" parent="WireConnects"]
+position = Vector2(56, 128)
+script = ExtResource("4_1mcn4")
+metadata/_edit_group_ = true
+
+[node name="Collision" type="CollisionShape2D" parent="WireConnects/WireConnect4"]
+position = Vector2(8, 0)
+shape = SubResource("RectangleShape2D_mncs5")

@@ -5,9 +5,7 @@ signal rotation_completed(tile)
 
 
 # tile specific config
-@export var directions_init: Array = [0, 1]
 @export var tile_coordinate: Vector2
-
 
 @onready var tile_display = $TileBG
 @onready var wire_connect_group = $WireConnects
@@ -18,14 +16,20 @@ var connected_neighbors: Array  # array of connected direction enums
 var is_powered: bool
 
 
-
 func _ready() -> void:
 	
 	connect("gui_input", Callable(self, "_on_tile_gui_input"))
 	is_rotating = false
 	
 	wire_connects = wire_connect_group.get_children()
-	load_directions(directions_init)
+	
+	# for test only
+	if len(wire_connects) == 2:
+		load_directions([0, 1])
+	elif len(wire_connects) == 3:
+		load_directions([0, 1, 2])
+	elif len(wire_connects) == 4:
+		load_directions([0, 1, 2, 3])
 
 
 # for initial level data load

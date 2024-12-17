@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://ckktebbqrwh3v"]
+
+[ext_resource type="Script" path="res://Scripts/tile.gd" id="1_272c6"]
+[ext_resource type="Texture2D" uid="uid://dad6sst881e0f" path="res://Arts/wire_tiles2.png" id="2_dqjbm"]
+[ext_resource type="Texture2D" uid="uid://2xr7faoy3prx" path="res://Arts/wire_tiles_connected2.png" id="3_smxd4"]
+[ext_resource type="Script" path="res://Scripts/wire_connect.gd" id="4_8rtml"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2t1nt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_dqjbm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_smxd4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mncs5"]
+size = Vector2(16, 16)
+
+[node name="Tile" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 128.0
+offset_bottom = 128.0
+pivot_offset = Vector2(64, 64)
+script = ExtResource("1_272c6")
+
+[node name="TileBG" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_2t1nt")
+centered = false
+
+[node name="WireConnects" type="Node2D" parent="."]
+
+[node name="WireConnect1" type="Area2D" parent="WireConnects"]
+position = Vector2(56, 0)
+script = ExtResource("4_8rtml")
+metadata/_edit_group_ = true
+
+[node name="Collision" type="CollisionShape2D" parent="WireConnects/WireConnect1"]
+position = Vector2(8, 0)
+shape = SubResource("RectangleShape2D_mncs5")
+
+[node name="WireConnect2" type="Area2D" parent="WireConnects"]
+position = Vector2(120, 64)
+script = ExtResource("4_8rtml")
+metadata/_edit_group_ = true
+
+[node name="Collision" type="CollisionShape2D" parent="WireConnects/WireConnect2"]
+position = Vector2(8, 0)
+shape = SubResource("RectangleShape2D_mncs5")
+
+[node name="WireConnect3" type="Area2D" parent="WireConnects"]
+position = Vector2(56, 128)
+script = ExtResource("4_8rtml")
+metadata/_edit_group_ = true
+
+[node name="Collision" type="CollisionShape2D" parent="WireConnects/WireConnect3"]
+position = Vector2(8, 0)
+shape = SubResource("RectangleShape2D_mncs5")

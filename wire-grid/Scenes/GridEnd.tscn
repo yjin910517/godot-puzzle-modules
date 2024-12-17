@@ -40,7 +40,7 @@ sprite_frames = SubResource("SpriteFrames_estw6")
 centered = false
 
 [node name="WireConnect" type="Area2D" parent="."]
-position = Vector2(-8, 64)
+position = Vector2(56, 0)
 script = ExtResource("3_ca45y")
 metadata/_edit_group_ = true
 

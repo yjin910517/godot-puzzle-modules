@@ -47,8 +47,7 @@ position = Vector2(8, 0)
 shape = SubResource("RectangleShape2D_mncs5")
 
 [node name="WireConnect2" type="Area2D" parent="WireConnects"]
-position = Vector2(128, 56)
-rotation = 1.5708
+position = Vector2(120, 64)
 script = ExtResource("2_7pube")
 metadata/_edit_group_ = true
 

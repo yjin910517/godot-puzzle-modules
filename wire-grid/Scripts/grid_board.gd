@@ -2,49 +2,53 @@ extends Control
 
 
 const TILE_SIZE = 128
+const GRID_SIZE = 4
+
 
 @onready var tiles = $Tiles
 @onready var start = $Start
 @onready var ends = $EndNodes
 
 var mission_success: bool
-
-# empty grid matrix
-var tile_matrix: Array = [
-	[null, null, null, null], 
-	[null, null, null, null], 
-	[null, null, null, null], 
-	[null, null, null, null], 
-]
+var tile_matrix: Array
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
+	# generate empty grid array to hold tiles
+	var row = []
+	for i in range(TILE_SIZE):
+		row.append(null)
+		
+	for j in range(TILE_SIZE):
+		tile_matrix.append(row.duplicate())
+	
+	# initiate tile status
 	var tile_x
 	var tile_y
-	
-	var tile_nodes = tiles.get_children()
-	for tile in tile_nodes:
-		tile.connect("rotation_completed", Callable(self, "_on_tile_rotated"))
-		
-		# fill each tile into the right location in tile_matrix
-		tile.size = Vector2(TILE_SIZE, TILE_SIZE)
-		tile.pivot_offset = tile.size/2
-		tile_x = tile.tile_coordinate.x
-		tile_y = tile.tile_coordinate.y
-		tile_matrix[tile_x][tile_y] = tile
-		tile.position = Vector2(tile_y * TILE_SIZE, tile_x * TILE_SIZE) # transposed axis
-	
-	# fill in start tile
+
+	# initiate start tile
 	start.size = Vector2(TILE_SIZE, TILE_SIZE)
 	start.pivot_offset = start.size/2
 	tile_x = start.tile_coordinate.x
 	tile_y = start.tile_coordinate.y
 	tile_matrix[tile_x][tile_y] = start
 	start.position = Vector2(tile_y * TILE_SIZE, tile_x * TILE_SIZE) # transposed axis
+	
+	# initiate rotating tiles
+	var tile_nodes = tiles.get_children()
+	for tile in tile_nodes:
+		tile.connect("rotation_completed", Callable(self, "_on_tile_rotated"))
+		
+		tile.size = Vector2(TILE_SIZE, TILE_SIZE)
+		tile.pivot_offset = tile.size/2
+		tile_x = tile.tile_coordinate.x
+		tile_y = tile.tile_coordinate.y
+		tile_matrix[tile_x][tile_y] = tile
+		tile.position = Vector2(tile_y * TILE_SIZE, tile_x * TILE_SIZE) # transposed axis
 
-	# fill in all target tiles
+	# initiate target tiles
 	var end_nodes = ends.get_children()
 	for end in end_nodes:
 		end.size = Vector2(TILE_SIZE, TILE_SIZE)
@@ -56,6 +60,17 @@ func _ready() -> void:
 	
 	# on start, the grid doesn't light up the already connected tiles
 
+
+# initiate the level
+func load_grid_data(grid_dataset):
+	pass
+
+
+# save grid tiles status data 
+func save_grid_data(grid_dataset):
+	pass
+
+	
 func _on_tile_rotated(rotated_tile):
 	
 	# check wire sensor overlaps and update each tile's connected neighbors
