@@ -112,7 +112,7 @@ func _save_grid_data():
 	}
 	
 	# export game data to data file
-	var save_file = FileAccess.open("res://LevelData/level1.save", FileAccess.WRITE)
+	var save_file = FileAccess.open("res://LevelData/level0.save", FileAccess.WRITE)
 	var json_string = JSON.stringify(dataset)
 	save_file.store_line(json_string)
 	print("level data saved!")
