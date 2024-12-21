@@ -13,15 +13,21 @@ var is_powered: bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
-	# point left
-	load_start_direction(start_direction)
 
+	wire_connect.set_direction(start_direction)
+	rotation_degrees = start_direction * 90
+	
 
 # for initial level data load
-func load_start_direction(init_direction):
-	wire_connect.set_direction(init_direction)
-	rotation_degrees = init_direction * 90
+func set_tile_data(tile_data):
+
+	start_direction = tile_data["direction"]
+	wire_connect.set_direction(start_direction)
+	
+	rotation_degrees = start_direction * 90
+	
+	tile_coordinate.x = tile_data["coordinate_x"]
+	tile_coordinate.y = tile_data["coordinate_y"]
 
 
 func power_up_wire():
@@ -32,3 +38,14 @@ func power_up_wire():
 func power_off_wire():
 	tile_display.frame = 0
 	is_powered = false
+
+
+func get_tile_data():
+	
+	var tile_data = {
+		"direction": start_direction,
+		"coordinate_x": tile_coordinate.x,
+		"coordinate_y": tile_coordinate.y
+	}
+	
+	return tile_data

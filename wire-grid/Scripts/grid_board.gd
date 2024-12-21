@@ -2,19 +2,30 @@ extends Control
 
 
 const TILE_SIZE = 128
-const GRID_SIZE = 4
 
-
+var start
 @onready var tiles = $Tiles
-@onready var start = $Start
 @onready var ends = $EndNodes
+@onready var save_btn = $SaveButton
 
 var mission_success: bool
 var tile_matrix: Array
 
+# tile scenes
+var StartScene = load("res://Scenes/GridStart.tscn")
+var EndScene = load("res://Scenes/GridEnd.tscn")
+var TileScenes = {
+	"two": load("res://Scenes/Tile2End.tscn"),
+	"three": load("res://Scenes/Tile3End.tscn"),
+	"four": load("res://Scenes/Tile4End.tscn"),
+}
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
+	# connect to data i/o buttons
+	save_btn.connect("pressed", Callable(self, "_save_grid_data"))
 	
 	# generate empty grid array to hold tiles
 	var row = []
@@ -24,53 +35,89 @@ func _ready() -> void:
 	for j in range(TILE_SIZE):
 		tile_matrix.append(row.duplicate())
 	
-	# initiate tile status
+	_load_grid_data()
+	
+	# to fix: on start, the grid doesn't light up the already connected tiles
+	_check_grid_neighbors()
+	_update_connected_route()
+
+# initiate the level
+func _load_grid_data():
+	
+	# load level data from saved file
+	if not FileAccess.file_exists("res://LevelData/level1.save"):
+		print("no level data found")
+		return # Error! We don't have a save to load.
+		
+	var save_file = FileAccess.open("res://LevelData/level1.save", FileAccess.READ)
+	var json_string = save_file.get_line()
+	var json = JSON.new()
+	var parse_result = json.parse(json_string)
+	var tile_dataset = json.data
+	
+	# create start tile node
+	start = StartScene.instantiate()
+	add_child(start)
+	start.set_tile_data(tile_dataset["start"])
+	_place_tile_to_grid(start)
+	
+	# create wire tiles
+	for node_data in tile_dataset["tiles"]:
+		var tile_type = node_data["type"]
+		var tile_node = TileScenes[tile_type].instantiate()
+		tiles.add_child(tile_node)
+		tile_node.connect("rotation_completed", Callable(self, "_on_tile_rotated"))
+		tile_node.set_tile_data(node_data)
+		_place_tile_to_grid(tile_node)
+
+	# create end tile nodes
+	for node_data in tile_dataset["ends"]:
+		var end_node = EndScene.instantiate()
+		ends.add_child(end_node)
+		end_node.set_tile_data(node_data)
+		_place_tile_to_grid(end_node)
+	
+
+func _place_tile_to_grid(tile_node):
+	tile_node.size = Vector2(TILE_SIZE, TILE_SIZE)
+	tile_node.pivot_offset = start.size/2
+	
 	var tile_x
 	var tile_y
 
-	# initiate start tile
-	start.size = Vector2(TILE_SIZE, TILE_SIZE)
-	start.pivot_offset = start.size/2
-	tile_x = start.tile_coordinate.x
-	tile_y = start.tile_coordinate.y
-	tile_matrix[tile_x][tile_y] = start
-	start.position = Vector2(tile_y * TILE_SIZE, tile_x * TILE_SIZE) # transposed axis
+	tile_x = tile_node.tile_coordinate.x
+	tile_y = tile_node.tile_coordinate.y
+	tile_matrix[tile_x][tile_y] = tile_node
+	tile_node.position = Vector2(tile_y * TILE_SIZE, tile_x * TILE_SIZE) # transposed axis
 	
-	# initiate rotating tiles
-	var tile_nodes = tiles.get_children()
-	for tile in tile_nodes:
-		tile.connect("rotation_completed", Callable(self, "_on_tile_rotated"))
-		
-		tile.size = Vector2(TILE_SIZE, TILE_SIZE)
-		tile.pivot_offset = tile.size/2
-		tile_x = tile.tile_coordinate.x
-		tile_y = tile.tile_coordinate.y
-		tile_matrix[tile_x][tile_y] = tile
-		tile.position = Vector2(tile_y * TILE_SIZE, tile_x * TILE_SIZE) # transposed axis
-
-	# initiate target tiles
-	var end_nodes = ends.get_children()
-	for end in end_nodes:
-		end.size = Vector2(TILE_SIZE, TILE_SIZE)
-		end.pivot_offset = end.size/2
-		tile_x = end.tile_coordinate.x
-		tile_y = end.tile_coordinate.y
-		tile_matrix[tile_x][tile_y] = end
-		end.position = Vector2(tile_y * TILE_SIZE, tile_x * TILE_SIZE) # transposed axis
-	
-	# on start, the grid doesn't light up the already connected tiles
-
-
-# initiate the level
-func load_grid_data(grid_dataset):
-	pass
-
 
 # save grid tiles status data 
-func save_grid_data(grid_dataset):
-	pass
+func _save_grid_data():
+	var start_data = start.get_tile_data()
 
+	var tile_data = []
+	var tile_nodes = tiles.get_children()
+	for tile in tile_nodes:
+		tile_data.append(tile.get_tile_data())
+		
+	var end_data = []
+	var end_nodes = ends.get_children()
+	for end in end_nodes:
+		end_data.append(end.get_tile_data())
 	
+	var dataset = {
+		"start": start_data,
+		"tiles": tile_data,
+		"ends": end_data
+	}
+	
+	# export game data to data file
+	var save_file = FileAccess.open("res://LevelData/level1.save", FileAccess.WRITE)
+	var json_string = JSON.stringify(dataset)
+	save_file.store_line(json_string)
+	print("level data saved!")
+
+
 func _on_tile_rotated(rotated_tile):
 	
 	# check wire sensor overlaps and update each tile's connected neighbors

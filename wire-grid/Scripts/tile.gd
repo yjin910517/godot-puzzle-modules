@@ -6,6 +6,7 @@ signal rotation_completed(tile)
 
 # tile specific config
 @export var tile_coordinate: Vector2
+@export var tile_type: String
 
 @onready var tile_display = $TileBG
 @onready var wire_connect_group = $WireConnects
@@ -21,25 +22,49 @@ func _ready() -> void:
 	connect("gui_input", Callable(self, "_on_tile_gui_input"))
 	is_rotating = false
 	
+	# initialize wire parameters
 	wire_connects = wire_connect_group.get_children()
-	
-	# for test only
 	if len(wire_connects) == 2:
-		load_directions([0, 1])
-	elif len(wire_connects) == 3:
-		load_directions([0, 1, 2])
-	elif len(wire_connects) == 4:
-		load_directions([0, 1, 2, 3])
-
-
-# for initial level data load
-func load_directions(new_directions: Array):
+		tile_type = "two"
+	if len(wire_connects) == 3:
+		tile_type = "three"
+	if len(wire_connects) == 4:
+		tile_type = "four"
+	
+	# initialize wire connects directions
 	var idx = 0
 	for connect_end in wire_connects:
-		connect_end.set_direction(new_directions[idx])
+		connect_end.set_direction(idx)
 		idx += 1
-		
 
+
+# for level data load
+func set_tile_data(tile_data):
+	tile_type = tile_data["type"]
+	rotation_degrees = tile_data["rotation"]
+	tile_coordinate.x = tile_data["coordinate_x"]
+	tile_coordinate.y = tile_data["coordinate_y"]
+	
+	# rotate the wire connectors to the desired state according to tile rotation
+	var num_rotations = int(rotation_degrees / 90)
+	for r in range(num_rotations):
+		for connect_end in wire_connects:
+				connect_end.rotate_direction()
+				
+
+# save game data
+func get_tile_data():
+	
+	var tile_data = {
+		"type": tile_type,
+		"rotation": int(rotation_degrees) % 360,
+		"coordinate_x": tile_coordinate.x,
+		"coordinate_y": tile_coordinate.y
+	}
+	
+	return tile_data
+	
+	
 func update_neighbors():
 	connected_neighbors = []
 	for connect_end in wire_connects:
@@ -75,7 +100,7 @@ func map_neighbor_node(direction):
 
 func get_neighbors():
 	return connected_neighbors
-	
+
 
 # rotate tile when being left clicked
 func _on_tile_gui_input(event):
